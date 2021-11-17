@@ -1,5 +1,7 @@
 class Question < ApplicationRecord
+  #Associations
   belongs_to :user
   
-  validates :text, :user, presence: true
+  #Validations
+  validates :text, :user, presence: true, length: { maximum: 255 }
 end

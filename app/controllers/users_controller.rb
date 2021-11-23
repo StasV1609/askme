@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  
-  #GET /users/:id
+  def index
+  end
+
+  def new
+  end
+
+  def edit
+  end
+
   def show
-    @hello = "Hello"
   end
 end

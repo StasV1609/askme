@@ -4,23 +4,24 @@ class User < ApplicationRecord
   # Constants
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest::SHA256.new
-  VALID_USERNAME_REGEX = /\A[a-zA-Z0–9_]+\z/i
+  VALID_USERNAME_REGEX = /\A\w+\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  
+  # Getters and Setters
+  attr_accessor :password
   
   # Associations
   has_many :questions, dependent: :destroy
   
   # Callbacks
   before_save :encrypt_password
-  before_save :generate_lowercase_username
+  before_save :generate_lowercase_username, :generate_lowercase_email
   
   # Validations
   validates :username, presence: true, length: { maximum: 40 }, format: { with: VALID_USERNAME_REGEX }
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :password,  presence: true, on: :create, confirmation: { case_sensitive: true }
-  
-  # Getters and Setters
-  attr_accessor :password
+  validates :password,  presence: true, on: :create, confirmation: true
+
 
   def self.authenticate(email, password)
     user = find_by(email: email)
@@ -31,6 +32,10 @@ class User < ApplicationRecord
       )
     )
     return user if user.password_hash == hashed_password
+  end
+  
+  def self.hash_to_string(password_hash)
+    password_hash.unpack('H*')[0]
   end
   
   private
@@ -45,12 +50,12 @@ class User < ApplicationRecord
         )
       end
     end
-
-    def self.hash_to_string(password_hash)
-      password_hash.unpack('H*')[0]
-    end
       
     def generate_lowercase_username
-      self.username.downcase!
+      username&.downcase!
+    end
+    
+    def generate_lowercase_email
+      email&.downcase!
     end
 end

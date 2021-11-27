@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Askme</title>
+    <meta charset="utf-8"/>
+    <title>Good Questions!</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +12,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    
+    <div class="header">
+      <div class="header-logo">
+        <h1 class="header-title">Good Questions!</h1>
+      </div>
+    </div>
+    
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -30,7 +30,8 @@ ActiveRecord::Schema.define(version: 2021_11_23_105053) do
     t.string "password_hash"
     t.string "password_salt"
     t.string "avatar_url"
-    t.index ["email", "username"], name: "index_users_on_email_and_username", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "questions", "users"

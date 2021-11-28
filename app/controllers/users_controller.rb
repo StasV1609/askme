@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @users = User.new(id: 1, name: 'Stas', username: 'Stas1609'), User.new(id: 2, name: 'Artem', username: 'Art12', avatar_url: 'https://images.app.goo.gl/yDtEE4iZQgv3F5U26' )
   end
 
   def new
@@ -12,7 +13,15 @@ class UsersController < ApplicationController
     @user = User.new(
       name: 'Stas',
       username: 'Stas1609',
-      avatar_url: 'https://image.freepik.com/free-vector/person-avatar-design_24877-38137.jpg'
     )
+    
+    @questions = [
+      Question.new(text: 'Как дела?', created_at: Date.parse('27.03.2016')),
+      Question.new(
+        text: 'В чем смысл жизни?', created_at: Date.parse('27.03.2016')
+      )
+    ]
+
+    @new_question = Question.new
   end
 end

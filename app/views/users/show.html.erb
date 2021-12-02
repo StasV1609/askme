@@ -20,7 +20,7 @@
   <div class="user-question-form buffer-both">
     <div class="form">
       <%= form_for @new_question do |f| %>
-      
+
         <%= f.hidden_field :user_id %>
 
         <div class="form-field">
@@ -38,6 +38,9 @@
 
 <div class="column-3-4">
   <div class="user-questions buffer-both">
+    <div class="count">
+      <%= "Задано: #{@questions_amount} #{sklonyator(@questions_amount, "вопрос", "вопроса", "вопросов")}" %>
+    </div>
     <div class="questions-list">
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>

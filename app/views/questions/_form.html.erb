@@ -9,7 +9,6 @@
         </ul>
       </div>
     <% end %>
-
     <%= f.hidden_field :user_id %>
 
     <div class="form-field">
@@ -26,6 +25,7 @@
 
     <div class="form-action buffer-both">
       <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
+      или
       <%= link_to "вернуться", user_path(@question.user) %>
     </div>
   <% end %>

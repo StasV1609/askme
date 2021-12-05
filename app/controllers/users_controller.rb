@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :authorize_user, except: %i[create new show index]
 
   def index
-    @users = User.new(id: 1, name: 'Stas', username: 'Stas1609'), User.new(id: 2, name: 'Artem', username: 'Art12')
+    @users = User.all
   end
 
   def new
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
   private
     def authorize_user
-      reject_user unless user == current_user  
+      reject_user unless @user == current_user  
     end
 
     def set_user
